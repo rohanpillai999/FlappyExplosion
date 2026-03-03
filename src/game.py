@@ -10,5 +10,14 @@ from pygame.locals import (
     QUIT
 )
 
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 800
+
 pygame.init()
 
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+running = True
+
+while running:
+    screen.fill((135, 206, 250))
