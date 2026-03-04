@@ -23,9 +23,16 @@ pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+running = True
+
 state = GameState.PLAYING
 
-while True:
+while running:
+    for event in pygame.event.get():
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                state = GameState.MENU
+
     if state == GameState.PLAYING:
         screen.fill((135, 206, 250))
     elif state == GameState.GAME_OVER:
