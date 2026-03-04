@@ -1,15 +1,7 @@
 import pygame
 from enum import Enum
 
-from pygame.locals import (
-    K_UP,
-    K_DOWN,
-    K_LEFT,
-    K_RIGHT,
-    K_ESCAPE,
-    KEYDOWN,
-    QUIT
-)
+from pygame.locals import *
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
@@ -25,13 +17,15 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 running = True
 
-state = GameState.PLAYING
+state = GameState.MENU
 
 while running:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 state = GameState.MENU
+            elif event.key == K_p:
+                state = GameState.PLAYING
 
     if state == GameState.PLAYING:
         screen.fill((135, 206, 250))
@@ -39,3 +33,5 @@ while running:
         screen.fill((0, 0, 0))
     elif state == GameState.MENU:
         screen.fill((0, 0, 0))
+    
+    pygame.display.flip()
