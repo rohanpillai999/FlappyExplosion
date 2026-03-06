@@ -16,7 +16,7 @@ pygame.init()
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.image.load("assets/flappy.png").convert()
+        self.surf = pygame.image.load("src/assets/flappy.png").convert()
         self.rect = self.surf.get_rect()
         self.last_jump = 0
     def update(self, pressed_keys):
