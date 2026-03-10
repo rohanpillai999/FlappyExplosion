@@ -1,5 +1,4 @@
 import pygame
-import random
 from enum import Enum
 
 from pygame.locals import *
@@ -17,17 +16,19 @@ pygame.init()
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.image.load("src/assets/flappy.png").convert()
+        self.surf = pygame.image.load("src/assets/flappy.png").convert_alpha()
         self.rect = self.surf.get_rect()
         self.last_jump = 0
         self.speed = 0
     def update(self, jumped):
         if jumped:
-            if pygame.time.get_ticks() - self.last_jump >= 90:
-                self.speed -= 30
+            if pygame.time.get_ticks() - self.last_jump >= 180:
+                self.speed -= 20
                 self.last_jump = pygame.time.get_ticks()
         
-        self.speed += 5
+        self.speed += 2
+        if self.speed > 5:
+            self.speed = 10
         self.rect.move_ip(0, self.speed)
         
         # Keep player on the screen
@@ -44,6 +45,7 @@ class Player(pygame.sprite.Sprite):
     def reset(self):
         self.rect.left = SCREEN_WIDTH // 2
         self.rect.top = SCREEN_HEIGHT // 2
+        self.speed = 0
 
 
 
@@ -68,7 +70,7 @@ clock = pygame.time.Clock()
 state = GameState.MENU
 
 while running:
-    # events = pygame.event.get()
+    pygame.event.pump()
     pressed_keys = pygame.key.get_pressed()
     
     
